@@ -13,6 +13,24 @@
  */
 
 // Source: schema.json
+export type Comment = {
+  _id: string;
+  _type: "comment";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  fullName?: string;
+  approved?: boolean;
+  email: string;
+  message: string;
+  post?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "post";
+  };
+};
+
 export type Post = {
   _id: string;
   _type: "post";
@@ -252,7 +270,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Post | BlockContent | SanityImageCrop | SanityImageHotspot | Author | Slug | Category | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Comment | Post | BlockContent | SanityImageCrop | SanityImageHotspot | Author | Slug | Category | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: ALL_POSTS_QUERY
@@ -296,23 +314,34 @@ export type ALL_POSTS_QUERYResult = Array<{
   }> | null;
 }>;
 // Variable: POST_BY_SLUG_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{ _id,title,slug,mainImage,body,publishedAt,   author -> {     name,     image,     slug   },  categories[] -> {    title,    slug  }}
+// Query: *[_type == "post" && slug.current == $slug && defined(mainImage)][0]{ _id,title,slug,mainImage{  asset ->},body,publishedAt,   author -> {     name,     image,     slug   },  categories[] -> {    title,    slug  },  "comments": *[_type == "comment" && post._ref ==^._id && approved == true]{    _id,    _createdAt,    fullName,    message,  }  }
 export type POST_BY_SLUG_QUERYResult = {
   _id: string;
   title: string | null;
   slug: Slug | null;
   mainImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
   } | null;
   body: BlockContent | null;
   publishedAt: string | null;
@@ -336,13 +365,59 @@ export type POST_BY_SLUG_QUERYResult = {
     title: string | null;
     slug: Slug | null;
   }> | null;
+  comments: Array<{
+    _id: string;
+    _createdAt: string;
+    fullName: string | null;
+    message: string;
+  }>;
 } | null;
+// Variable: POSTS_BY_CATEGORY_QUERY
+// Query: *[  _type == "post" && $categoryId in categories]
+export type POSTS_BY_CATEGORY_QUERYResult = Array<{
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "author";
+  };
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  publishedAt?: string;
+  body?: BlockContent;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\"] | order(_publishedAt desc)[0...8]{\n   _id,\n   title,\n   slug,\n   mainImage,\n   author -> {\n     name,\n     image,\n     slug\n   },\n  categories[] -> {\n    title,\n    slug\n  }\n}": ALL_POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n _id,\ntitle,\nslug,\nmainImage,\nbody,\npublishedAt,\n   author -> {\n     name,\n     image,\n     slug\n   },\n  categories[] -> {\n    title,\n    slug\n  }}": POST_BY_SLUG_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug && defined(mainImage)][0]{\n _id,\ntitle,\nslug,\nmainImage{\n  asset ->\n},\nbody,\npublishedAt,\n   author -> {\n     name,\n     image,\n     slug\n   },\n  categories[] -> {\n    title,\n    slug\n  },\n  \"comments\": *[_type == \"comment\" && post._ref ==^._id && approved == true]{\n    _id,\n    _createdAt,\n    fullName,\n    message,\n\n  }\n  }": POST_BY_SLUG_QUERYResult;
+    "*[\n  _type == \"post\" && $categoryId in categories\n]": POSTS_BY_CATEGORY_QUERYResult;
   }
 }

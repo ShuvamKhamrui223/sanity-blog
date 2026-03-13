@@ -3,6 +3,7 @@ import { Karla, Tenor_Sans } from "next/font/google";
 import "../globals.css";
 import Navbar from "@/components/layout/navbar";
 import { SanityLive } from "@/sanity/lib/live";
+import Bradcrumb from "@/components/layout/bradcrumb";
 
 const karla = Karla({
   variable: "--karla",
@@ -31,7 +32,8 @@ export default function FrontendLayout({
     <html lang="en">
       <body className={`${karla.variable} ${tenorSans.variable} antialiased`}>
         <Navbar />
-        <main className="min-h-screen flex flex-col px-[5%] py-6">
+        <main className="min-h-screen flex flex-col px-[4%] py-10">
+          <Bradcrumb />
           {children}
           <SanityLive />
         </main>
