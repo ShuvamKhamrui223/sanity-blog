@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Karla, Tenor_Sans } from "next/font/google";
+// @ts-ignore css file path is correct but still showing error
 import "../globals.css";
 import Navbar from "@/components/layout/navbar";
 import { SanityLive } from "@/sanity/lib/live";
-import Bradcrumb from "@/components/layout/bradcrumb";
+import Footer from "@/components/layout/footer";
+import NewsletterForm from "@/components/forms/newsletter-form";
+import ProviderWrapper from "@/components/providers/provider-wrapper";
 
 const karla = Karla({
   variable: "--karla",
@@ -29,14 +32,20 @@ export default function FrontendLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${karla.variable} ${tenorSans.variable} antialiased`}>
-        <Navbar />
-        <main className="min-h-screen flex flex-col px-[4%] py-10">
-          <Bradcrumb />
-          {children}
-          <SanityLive />
-        </main>
+    <html>
+      <body
+        className={`min-h-screen flex flex-col font-body-sm text-on-surface ${karla.variable} ${tenorSans.variable} antialiased`}
+      >
+        <ProviderWrapper>
+          <Navbar />
+          <main className="flex flex-col app-container pt-12 pb-10 mt-8 md:mt-12">
+            {/* <Bradcrumb /> */}
+            {children}
+            <SanityLive />
+          </main>
+          <NewsletterForm />
+          <Footer />
+        </ProviderWrapper>
       </body>
     </html>
   );

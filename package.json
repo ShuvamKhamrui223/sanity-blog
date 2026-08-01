@@ -12,6 +12,11 @@
     "typegen": "sanity schema extract --enforce-required-fields --path=./src/sanity/extract.json && sanity typegen generate"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.6.3",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^9.2.0",
+    "@mui/material": "^9.2.0",
     "@sanity/client": "^7.17.0",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",

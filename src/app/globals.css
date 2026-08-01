@@ -1,27 +1,188 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Colors */
+  --color-outline-variant: hsl(249, 21%, 81%);
+  --color-on-primary-fixed-variant: hsl(246, 71%, 47%);
+  --color-on-primary: hsl(0, 0%, 100%);
+  --color-primary-container: hsl(243, 75%, 59%);
+  --color-on-tertiary-container: hsl(32, 100%, 81%);
+  --color-surface-container-low: hsl(210, 12%, 95%);
+  --color-outline: hsl(247, 7%, 50%);
+  --color-on-secondary-fixed: hsl(223, 12%, 12%);
+  --color-on-secondary-container: hsl(225, 51%, 40%);
+  --color-secondary: hsl(225, 44%, 39%);
+  --color-surface-tint: hsl(243, 74%, 58%);
+  --color-surface-dim: hsl(210, 3%, 85%);
+  --color-on-tertiary-fixed-variant: hsl(37, 66%, 20%);
+  --color-on-tertiary: hsl(0, 0%, 100%);
+  --color-secondary-fixed: hsl(227, 63%, 91%);
+  --color-on-surface: hsl(195, 2%, 11%);
+  --color-on-error: hsl(0, 0%, 100%);
+  --color-on-primary-fixed: hsl(249, 70%, 21%);
+  --color-error-container: hsl(6, 100%, 92%);
+  --color-on-background: hsl(195, 2%, 11%);
+  --color-on-primary-container: hsl(245, 100%, 94%);
+  --color-on-tertiary-fixed: hsl(33, 20%, 8%);
+  --color-tertiary-fixed-dim: hsl(34, 100%, 69%);
+  --color-tertiary: hsl(37, 69%, 20%);
+  --color-surface-container-highest: hsl(210, 6%, 89%);
+  --color-primary-fixed-dim: hsl(243, 100%, 88%);
+  --color-surface-container: hsl(210, 6%, 94%);
+  --color-surface-container-high: hsl(210, 6%, 91%);
+  --color-primary-fixed: hsl(246, 100%, 94%);
+  --color-inverse-surface: hsl(195, 3%, 19%);
+  --color-inverse-on-surface: hsl(210, 5%, 94%);
+  --color-inverse-primary: hsl(243, 100%, 88%);
+  --color-on-secondary: hsl(0, 0%, 100%);
+  --color-error: hsl(0, 75%, 42%);
+  --color-surface-bright: hsl(210, 8%, 98%);
+  --color-surface-variant: hsl(210, 6%, 89%);
+  --color-on-surface-variant: hsl(244, 16%, 30%);
+  --color-secondary-fixed-dim: hsl(227, 27%, 80%);
+  --color-secondary-container: hsl(227, 59%, 90%);
+  --color-on-secondary-fixed-variant: hsl(223, 23%, 30%);
+  --color-surface: hsl(210, 8%, 98%);
+  --color-surface-container-lowest: hsl(0, 0%, 100%);
+  --color-on-error-container: hsl(357, 100%, 29%);
+  --color-tertiary-container: hsl(38, 100%, 27%);
+  --color-primary: hsl(246, 69%, 48%);
+  --color-background: hsl(210, 8%, 98%);
+  --color-tertiary-fixed: hsl(33, 100%, 84%);
+  /* Border radius */
+  --radius: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  /* Spacing */
+  --spacing-stack-lg: 4rem;
+  --spacing-stack-sm: 0.5rem;
+  --spacing-content-max-width: 1024px;
+  --spacing-gutter: 1.5rem;
+  --spacing-page-margin: 2rem;
+  --spacing-stack-md: 1.5rem;
+
+  /* Font sizes */
+  --text-display-article: 48px;
+  --text-display-article--line-height: 56px;
+  --text-display-article--letter-spacing: -0.02em;
+  --text-display-article--font-weight: 700;
+
+  --text-display-article-mobile: 32px;
+  --text-display-article-mobile--line-height: 40px;
+  --text-display-article-mobile--letter-spacing: -0.01em;
+  --text-display-article-mobile--font-weight: 700;
+
+  --text-headline-section: 30px;
+  --text-headline-section--line-height: 28px;
+  --text-headline-section--letter-spacing: 0.01em;
+  --text-headline-section--font-weight: 600;
+
+  --text-label-ui: 13px;
+  --text-label-ui--line-height: 16px;
+  --text-label-ui--letter-spacing: 0.05em;
+  --text-label-ui--font-weight: 500;
+
+  --text-body-main: 20px;
+  --text-body-main--line-height: 32px;
+  --text-body-main--font-weight: 400;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 400;
+
+  --text-quote-pull: 24px;
+  --text-quote-pull--line-height: 36px;
+  --text-quote-pull--font-weight: 400;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.app-container {
+  @apply px-[2rem] lg:px-[2%] w-full md:max-w-[90%] mx-auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(0, 96%, 98%);
+  color: #191c1d;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply line-clamp-2
+}
+
+h1 {
+  @apply text-5xl md:leading-tight mb-6
+}
+
+h2 {
+  @apply text-4xl mb-stack-md;
+}
+
+h3 {
+  @apply text-3xl leading-snug text-on-surface group-hover:text-primary transition-colors mb-2
+}
+
+h4 {
+  @apply text-xl mb-2 group-hover:text-primary transition-colors
+}
+
+.profile-card-overlap {
+  margin-top: -120px;
+}
+
+.glass-effect {
+  backdrop-filter: blur(8px);
+  background-color: var(--color-on-primary);
+}
+
+.tonal-layer-1 {
+  background-color: #f9fafb;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+.article-gradient {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.saved-post-item {
+  transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+.saved-post-item:hover {
+  transform: translateX(4px);
+}
+
+.removed {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
 }
