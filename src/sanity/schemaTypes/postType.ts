@@ -13,6 +13,7 @@ export const postType = defineType({
     }),
     defineField({
       name: "slug",
+      title: "Slug",
       type: "slug",
       options: {
         source: "title",
@@ -20,11 +21,14 @@ export const postType = defineType({
     }),
     defineField({
       name: "author",
+      title: "Author",
+      description: "Pick one author from the list of authors",
       type: "reference",
       to: { type: "author" },
     }),
     defineField({
       name: "mainImage",
+      title: "Thumbnail",
       type: "image",
       options: {
         hotspot: true,
@@ -40,6 +44,7 @@ export const postType = defineType({
     defineField({
       name: "categories",
       type: "array",
+      title: "Categories",
       of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
     }),
     defineField({
@@ -53,11 +58,16 @@ export const postType = defineType({
     defineField({
       name: "contentTier",
       type: "string",
+      title: "Content Tier",
       options: {
-        list: ["free tier", "Subscribers only"],
+        list: [
+          { title: "Free tier", value: "free-tier" },
+          { title: "Subscribers only", value: "subscribers-only" },
+        ],
         layout: "dropdown",
       },
-      initialValue:"free-tier"
+      initialValue: "Free tier",
+      validation: (Rule) => Rule.required().error("Content tier is required"),
     }),
   ],
   preview: {

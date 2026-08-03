@@ -1,13 +1,14 @@
 import { ClerkLoaded, SignInButton as ClerkSignInButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 const SignInButton = () => {
   return (
     <ClerkLoaded>
-      <ClerkSignInButton>
-        <button className="capitalize cursor-pointer hover:underline underline-offset-4 rounded-sm px-4 ">
+      <>
+        <Link href="/sign-in" className="capitalize cursor-pointer hover:underline underline-offset-4 rounded-sm px-4 ">
           sign in
-        </button>
-      </ClerkSignInButton>
+        </Link>
+      </>
     </ClerkLoaded>
   );
 };

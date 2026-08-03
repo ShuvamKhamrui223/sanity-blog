@@ -16,4 +16,6 @@ todo for tomorrow
 
 Todo
 1. integrate neondb for library functionality
-2. enhance authhor card image quality at homepage
+2. enhance author card image quality at homepage
+3. protect library page fro unauthenticated users
+4. add protection for subscribers only articles

@@ -1,17 +1,20 @@
 import { defineQuery } from "next-sanity";
 
-export const ALL_POSTS_QUERY = defineQuery(`
-  *[_type == "post"] | order(publishedAt desc){
-  title,
+const postCardProjection = `{
+ title,
   "slug":slug.current,
     mainImage,
     publishedAt,
+    contentTier,
     categories[] ->{
       title,
       slug
     }
 }
-  `);
+`;
+export const ALL_POSTS_QUERY = defineQuery(`
+  *[_type == "post"] | order(publishedAt desc)${postCardProjection}
+`);
 
 export const POST_BY_SLUG_QUERY =
   defineQuery(`*[_type == "post" && slug.current == $slug && defined(mainImage)][0]{
@@ -19,6 +22,7 @@ export const POST_BY_SLUG_QUERY =
 title,
 slug,
 mainImage,
+contentTier,
 body,
 publishedAt,
    author -> {
@@ -53,13 +57,12 @@ export const ALL_CATEGORIES_QUERY = defineQuery(`*[_type== "category"]{
 export const POST_BY_CATEGORY_SLUG_QUERY = defineQuery(`
   *[_type == "post"
    && references(*[_type == "category" && slug.current == $slug][0]._id)]
-   | order(publishedAt desc)`);
+  ${postCardProjection} | order(publishedAt desc)`);
 
 export const POSTS_BY_AUTHOR_SLUG_QUERY = defineQuery(`
   *[_type == "post"
-   && references(*[_type == "author" && slug.current == $slug][0]._id)]
+   && references(*[_type == "author" && slug.current == $slug][0]._id)]${postCardProjection}
    | order(publishedAt desc)`);
-
 
 export const AUTHOR_DETAILS_QUERY = defineQuery(`
 *[_type == "author" && slug.current == $slug][0]{
