@@ -11,7 +11,7 @@ const MoreFromAuthor = async ({ authorId }: { authorId: string }) => {
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-12">
         {postsOfAuthor?.map((item) => (
-          <RecommendationCard key={item.slug?.current} data={item} />
+          <RecommendationCard key={item.slug} data={item} />
         ))}
       </div>
     </section>

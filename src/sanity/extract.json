@@ -316,15 +316,15 @@
           "of": [
             {
               "type": "string",
-              "value": "free tier"
+              "value": "free-tier"
             },
             {
               "type": "string",
-              "value": "Subscribers only"
+              "value": "subscribers-only"
             }
           ]
         },
-        "optional": true
+        "optional": false
       }
     }
   },

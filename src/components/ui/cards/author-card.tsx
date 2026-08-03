@@ -19,7 +19,7 @@ const AuthorCard = ({ authorCardData }: AuthorCardProps) => {
             <div className="relative size-10 rounded-full overflow-hidden">
               <Image
                 src={authorImageUrl}
-                alt="user profile image"
+                alt={`Profile picture of ${authorCardData?.name}`}
                 fill
                 className="object-cover"
               />
@@ -28,7 +28,7 @@ const AuthorCard = ({ authorCardData }: AuthorCardProps) => {
             <div className="relative size-5 bg-zinc-800 p-4 rounded-full">
               <Image
                 src={"/user.svg"}
-                alt="user profile image"
+                alt={`User profile image of ${authorCardData?.name}`}
                 fill
                 className="invert scale-50"
               />

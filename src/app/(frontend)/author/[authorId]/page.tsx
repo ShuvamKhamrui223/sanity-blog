@@ -12,6 +12,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import SubscriptionOnlyOverlay from "@/components/ui/subscription-only-overlay";
 
 export async function generateMetadata({
   params,
@@ -59,7 +60,7 @@ const AuthorArticleGrid = async ({ authorId }: { authorId: string }) => {
         </header>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
           {data.map((post) => (
-            <AuthorArticleCard key={post.slug?.current} post={post} />
+            <AuthorArticleCard key={post.slug} post={post} />
           ))}
         </ul>
       </section>
@@ -77,21 +78,29 @@ const AuthorArticleCard = ({
   return (
     <article className="group outline-1 outline-outline-variant">
       <div className="flex flex-col md:flex-row gap-8 items-start">
-        <div className="w-1/2 h-70 overflow-hidden relative rounded">
-          {cardCoverImageUrl ? (
-            <Image
-              src={cardCoverImageUrl}
-              alt={post.mainImage?.alt || "Article cover image"}
-              width={300}
-              height={250}
-              loading="lazy"
-              className="w-full h-full object-cover hover:scale-105 transition-all duration-500"
-            />
-          ) : null}
-        </div>
+
+<>
+          <div className="w-1/2 h-70 overflow-hidden relative rounded">
+            {post.contentTier === "subscribers-only" ? (
+              <SubscriptionOnlyOverlay />
+            ) : null}
+            {cardCoverImageUrl ? (
+              <Image
+                src={cardCoverImageUrl}
+                alt={
+                  post.mainImage?.alt ||
+                  `Article cover image for ${post.title}`
+                }
+                fill
+                loading="lazy"
+                className="w-full h-full object-cover transition-all duration-500"
+              />
+            ) : null}
+          </div>
+        </>
         <div className="flex-1 py-4 px-2">
           <h3>
-            <Link href={`/article/${post.slug?.current}`}>{post.title}</Link>
+            <Link href={`/article/${post.slug}`}>{post.title}</Link>
           </h3>
           <div className="flex items-center justify-between">
             {/* <span className="font-label-ui text-[12px] text-on-surface-variant">

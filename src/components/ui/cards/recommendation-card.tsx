@@ -12,7 +12,7 @@ const RecommendationCard = ({
     <article className="group">
       {data.mainImage ? (
         <Link
-          href={`/article/${data?.slug?.current}`}
+          href={`/article/${data?.slug}`}
           title={`Click this link to open ${data.title} article`}
         >
           <div className="h-80 relative bg-surface-container rounded-md overflow-hidden mb-4">
@@ -26,7 +26,7 @@ const RecommendationCard = ({
         </Link>
       ) : null}
       <h4>
-        <Link href={`/article/${data?.slug?.current}`}>{data?.title} </Link>
+        <Link href={`/article/${data?.slug}`}>{data?.title} </Link>
       </h4>
     </article>
   );

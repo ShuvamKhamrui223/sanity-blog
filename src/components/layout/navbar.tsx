@@ -7,6 +7,7 @@ import { Show, UserButton } from "@clerk/nextjs";
 import SignInButton from "../buttons/sign-in-button";
 import SignUpButton from "../buttons/sign-up-button";
 import Logo from "../ui/Logo";
+import { auth } from "@clerk/nextjs/server";
 
 const Navbar = () => {
   return (
@@ -21,6 +22,7 @@ const Navbar = () => {
             <SignUpButton />
           </Show>
           <Show when="signed-in">
+            <UserTierBadge />
             <UserButton />
           </Show>
         </div>
@@ -31,3 +33,21 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const UserTierBadge = async () => {
+  const { has } = await auth();
+  const isProMember = has({ plan: "pro_tier" });
+  if (isProMember) {
+    return (
+      <div className="bg-amber-600 text-on-primary-container px-2 py-1 rounded-full text-xs font-medium">
+        {isProMember ? "Pro Member" : "Free Member"}
+      </div>
+    );
+  } else {
+    return (
+      <div className="bg-primary-container text-on-primary-container px-2 py-1 rounded-full text-xs font-medium">
+        {isProMember ? "Pro Member" : "Free Member"}
+      </div>
+    );
+  }
+};
