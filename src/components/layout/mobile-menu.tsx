@@ -5,10 +5,10 @@ import { MenuItem } from "@/types/global";
 import { Close, Menu } from "@mui/icons-material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, startTransition } from "react";
+import { useState, startTransition, Suspense } from "react";
 import SignUpButton from "../buttons/sign-up-button";
 import SignInButton from "../buttons/sign-in-button";
-import { ClerkLoaded, Show, UserAvatar, UserButton } from "@clerk/nextjs";
+import { ClerkLoaded, Show, UserButton } from "@clerk/nextjs";
 
 const MobileMenu = ({ menuItems }: { menuItems: MenuItem[] }) => {
   const [isOpen, setisOpen] = useState(false);
@@ -40,9 +40,11 @@ const MobileMenu = ({ menuItems }: { menuItems: MenuItem[] }) => {
               <SignUpButton />
               <SignInButton />
             </Show>
-            <Show when={"signed-in"}>
+            <div className="flex items-center gap-2">
+              <Show when={"signed-in"}>
                 <UserButton />
-            </Show>
+              </Show>
+            </div>
           </ClerkLoaded>
         </div>
         <ul className="flex flex-col">

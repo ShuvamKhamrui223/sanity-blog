@@ -1,8 +1,9 @@
 import { defineQuery } from "next-sanity";
 
 const postCardProjection = `{
- title,
-  "slug":slug.current,
+    _id,
+    title,
+    "slug":slug.current,
     mainImage,
     publishedAt,
     contentTier,
@@ -10,7 +11,7 @@ const postCardProjection = `{
       title,
       slug
     }
-}
+    }
 `;
 export const ALL_POSTS_QUERY = defineQuery(`
   *[_type == "post"] | order(publishedAt desc)${postCardProjection}

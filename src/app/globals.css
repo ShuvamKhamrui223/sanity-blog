@@ -99,6 +99,7 @@
   --text-quote-pull: 24px;
   --text-quote-pull--line-height: 36px;
   --text-quote-pull--font-weight: 400;
+  --highest-font-size: 48px;
 }
 
 .material-symbols-outlined {
@@ -115,23 +116,23 @@ body {
   scroll-behavior: smooth;
 }
 
-h1,
+/* h1,
 h2,
 h3,
 h4 {
   @apply line-clamp-2
-}
+} */
 
 h1 {
-  @apply text-5xl md:leading-tight mb-6
+  @apply text-3xl md:text-5xl md:leading-tight mb-6
 }
 
 h2 {
-  @apply text-4xl mb-stack-md;
+  @apply text-[2rem] md:text-4xl mb-stack-md;
 }
 
 h3 {
-  @apply text-3xl leading-snug text-on-surface group-hover:text-primary transition-colors mb-2
+  @apply text-[1.8rem] md:text-3xl leading-snug text-on-surface group-hover:text-primary transition-colors mb-2
 }
 
 h4 {

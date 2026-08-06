@@ -1,13 +1,11 @@
-import Image from "next/image";
 import MenuItems from "./menuItems";
-import Link from "next/link";
 import MobileMenu from "./mobile-menu";
 import { menuItems } from "@/constants/global";
 import { Show, UserButton } from "@clerk/nextjs";
 import SignInButton from "../buttons/sign-in-button";
 import SignUpButton from "../buttons/sign-up-button";
 import Logo from "../ui/Logo";
-import { auth } from "@clerk/nextjs/server";
+import { UserTierBadge } from "./user-badge";
 
 const Navbar = () => {
   return (
@@ -21,11 +19,10 @@ const Navbar = () => {
             <SignInButton />
             <SignUpButton />
           </Show>
-          <Show when="signed-in">
-            <UserTierBadge />
-            <UserButton />
-          </Show>
         </div>
+          <Show when="signed-in">
+              <UserTierBadge />
+          </Show>
         <MobileMenu menuItems={menuItems} />
       </nav>
     </header>
@@ -34,20 +31,4 @@ const Navbar = () => {
 
 export default Navbar;
 
-const UserTierBadge = async () => {
-  const { has } = await auth();
-  const isProMember = has({ plan: "pro_tier" });
-  if (isProMember) {
-    return (
-      <div className="bg-amber-600 text-on-primary-container px-2 py-1 rounded-full text-xs font-medium">
-        {isProMember ? "Pro Member" : "Free Member"}
-      </div>
-    );
-  } else {
-    return (
-      <div className="bg-primary-container text-on-primary-container px-2 py-1 rounded-full text-xs font-medium">
-        {isProMember ? "Pro Member" : "Free Member"}
-      </div>
-    );
-  }
-};
+

@@ -1,5 +1,5 @@
 const PricingPage = () => {
-  return <div>PricingPage</div>;
+  return <section className="app-container">PricingPage</section>;
 };
 
 export default PricingPage;

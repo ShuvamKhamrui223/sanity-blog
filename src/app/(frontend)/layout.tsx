@@ -32,11 +32,11 @@ export default function FrontendLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
-      <body
-        className={`min-h-screen flex flex-col font-body-sm text-on-surface ${karla.variable} ${tenorSans.variable} antialiased`}
-      >
-        <ProviderWrapper>
+    <ProviderWrapper>
+      <html>
+        <body
+          className={`min-h-svh flex flex-col font-body-sm text-on-surface ${karla.variable} ${tenorSans.variable} antialiased`}
+        >
           <Navbar />
           <main className="flex flex-col app-container pt-12 pb-10 mt-8 md:mt-12">
             {/* <Bradcrumb /> */}
@@ -45,8 +45,8 @@ export default function FrontendLayout({
           </main>
           <NewsletterForm />
           <Footer />
-        </ProviderWrapper>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ProviderWrapper>
   );
 }

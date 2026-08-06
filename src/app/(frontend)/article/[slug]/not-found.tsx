@@ -1,8 +1,14 @@
+import CategoriesSlider from "@/components/ui/sections/categories-slider";
 
 const ArticleNotFound = () => {
   return (
-    <div>ArticleNotFound</div>
-  )
-}
+    <section className="gutter-space">
+      <h1>Article Not Found</h1>
+      <p>The article you are looking for does not exist.</p>
 
-export default ArticleNotFound
+      <CategoriesSlider />
+    </section>
+  );
+};
+
+export default ArticleNotFound;

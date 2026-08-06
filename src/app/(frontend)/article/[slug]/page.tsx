@@ -1,3 +1,4 @@
+import CommentForm from "@/components/forms/comment-form";
 import ArticleContent from "@/components/ui/sections/article-Content";
 import ArticleHeader from "@/components/ui/sections/article/article-header";
 import MoreFromAuthor from "@/components/ui/sections/article/more-from-author";
@@ -38,7 +39,6 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const { data } = await getPostBySlug(slug);
   const { has, userId } = await auth();
-console.log()
   const isProMember = has({ plan: "pro_tier" });
 
   if (!data) {
@@ -68,7 +68,6 @@ console.log()
       </>
     );
 
-
   if (!userId) {
     redirect("/sign-in");
   }
@@ -90,29 +89,26 @@ console.log()
     );
   }
 
-
-
-    return (
-      <>
-        {data != null ? (
-          <ArticleHeader
-            author={data.author}
-            category={data.categories}
-            publishedAt={data.publishedAt}
-            title={data.title}
-            mainImage={data.mainImage}
-          />
-        ) : null}
-
-        <ArticleContent content={data.body} />
-
-        {data.author?.slug !== null && data.author?.slug !== undefined ? (
-          <Suspense fallback={"Loading more articles"}>
-            <MoreFromAuthor authorId={data.author?.slug.current} />
-          </Suspense>
-        ) : null}
-      </>
-    );
+  return (
+    <>
+      {data != null ? (
+        <ArticleHeader
+          author={data.author}
+          category={data.categories}
+          publishedAt={data.publishedAt}
+          title={data.title}
+          mainImage={data.mainImage}
+        />
+      ) : null}
+      <ArticleContent content={data.body} />
+      {data.author?.slug !== null && data.author?.slug !== undefined ? (
+        <Suspense fallback={"Loading more articles"}>
+          <MoreFromAuthor authorId={data.author?.slug.current} />
+        </Suspense>
+      ) : null}
+      <Suspense>{data?._id && <CommentForm postId={data?._id} />}</Suspense>;
+    </>
+  );
 };
 
 export default page;

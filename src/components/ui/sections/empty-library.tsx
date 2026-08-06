@@ -1,3 +1,5 @@
+import { AutoStories } from "@mui/icons-material";
+import Link from "next/link";
 
 const EmptyLibrary = () => {
   return (
@@ -6,12 +8,7 @@ const EmptyLibrary = () => {
       id="empty-state"
     >
       <div className="mb-stack-md text-primary/20">
-        <span
-          className="material-symbols-outlined text-[120px]"
-        //   style="font-variation-settings: 'wght' 100;"
-        >
-          auto_stories
-        </span>
+        <AutoStories/>
       </div>
       <h2 className="font-display-article text-display-article-mobile text-on-surface mb-stack-sm">
         Your shelf is empty
@@ -20,12 +17,12 @@ const EmptyLibrary = () => {
         You haven&apos;t saved any stories yet. Explore the latest journals and
         bookmark them to read later at your leisure.
       </p>
-      <a
+      <Link
         className="inline-flex items-center px-6 py-3 bg-primary text-on-primary font-label-ui text-label-ui rounded-full hover:shadow-lg transition-all active:scale-95"
-        href="#"
+        href="/latest"
       >
         Browse Latest Stories
-      </a>
+      </Link>
     </div>
   );
 }
