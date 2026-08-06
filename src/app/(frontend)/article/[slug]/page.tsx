@@ -1,4 +1,5 @@
 import CommentForm from "@/components/forms/comment-form";
+import CommentsList from "@/components/ui/comments-list";
 import ArticleContent from "@/components/ui/sections/article-Content";
 import ArticleHeader from "@/components/ui/sections/article/article-header";
 import MoreFromAuthor from "@/components/ui/sections/article/more-from-author";
@@ -106,7 +107,9 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <MoreFromAuthor authorId={data.author?.slug.current} />
         </Suspense>
       ) : null}
-      <Suspense>{data?._id && <CommentForm postId={data?._id} />}</Suspense>;
+      <Suspense>{data?._id && <CommentForm postId={data?._id} />}</Suspense>
+
+      <CommentsList comments={data.comments} />
     </>
   );
 };

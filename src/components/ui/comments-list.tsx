@@ -8,9 +8,10 @@ const CommentsList = ({ comments }: CommentsListProps) => {
   if (comments.length === 0) return <></>;
   return (
     <ul className="w-full max-w-5xl flex flex-col gap-8 py-10 ">
+      <label htmlFor="" className="text-2xl capitalize">comments</label>
       {comments.map((comment) => (
         <li
-          className="odd:bg-zinc-900 rounded-xl flex flex-col gap-2 px-6 py-5"
+          className=" rounded-xl flex flex-col gap-2 px-6 py-5 shadow-2xl"
           key={comment._id}
         >
           <small className="space-x-4">

@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 import UserActionButton from "../../buttons/user-action-button";
+import ShareButton from "@/components/buttons/share-button";
 
 type ArticleHeaderProps = {
   category: NonNullable<POST_BY_SLUG_QUERYResult>["categories"];
@@ -89,9 +90,12 @@ const ArticleHeader: FC<ArticleHeaderProps> = ({
 
       {/* action buttons */}
       <div className="flex items-center gap-4 text-on-surface-variant">
-        <button className="hover:text-primary transition-colors flex items-center gap-1">
-          <ShareRounded />
-        </button>
+        <ShareButton
+          sharableData={{
+            title: title!,
+            publishedAt: publishedAt!,
+          }}
+        />
         <UserActionButton slug={slugify(title!)} />
       </div>
     </header>

@@ -63,6 +63,7 @@ const AuthorArticleGrid = async ({ authorId }: { authorId: string }) => {
     </>
   );
 };
+
 const AuthorArticleCard = ({
   post,
 }: {
