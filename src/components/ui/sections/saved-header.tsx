@@ -9,12 +9,6 @@ const SavedHeader = () => {
           Your saved stories and bookmarks for later reading.
         </p>
       </div>
-      <div className="flex gap-2 mb-1">
-        <button className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high hover:bg-surface-container-highest text-label-ui font-label-ui transition-colors">
-          <span className="material-symbols-outlined text-[18px]">sort</span>
-          Recent
-        </button>
-      </div>
     </header>
   );
 };

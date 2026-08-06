@@ -37,14 +37,11 @@ const AuthorCard = ({ authorCardData }: AuthorCardProps) => {
         </div>
         <div className="grow">
           <div className="flex items-center justify-between mb-2">
-            <h4>
-              {authorCardData?.name}
-            </h4>
-            <button className="border border-primary text-primary px-4 py-1 rounded-full font-label-ui text-label-ui hover:bg-primary hover:text-on-primary transition-all duration-300">
-              Follow
-            </button>
+            <h4>{authorCardData?.name}</h4>
+              {/* <button className="border border-primary text-primary px-4 py-1 rounded-full font-label-ui text-label-ui hover:bg-primary hover:text-on-primary transition-all duration-300">
+                Follow
+              </button> */}
           </div>
-
         </div>
       </div>
     </section>

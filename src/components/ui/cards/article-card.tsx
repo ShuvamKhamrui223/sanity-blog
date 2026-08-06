@@ -4,15 +4,17 @@ import { BookmarkAddOutlined } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import SubscriptionOnlyOverlay from "../subscription-only-overlay";
+import BookmarkButton from "../buttons/user-action-buttons/add-to-library-button";
+import UserActionButton from "../buttons/user-action-button";
 interface ArticleCardProps {
   content: ALL_POSTS_QUERYResult[0];
 }
 const ArticleCard = ({ content }: ArticleCardProps) => {
   return (
-    <article key={content?.slug} className="group relative">
+    <article key={content?.slug} className="relative">
       <div className="group flex flex-col md:flex-row gap-8 items-start outline-1 outline-outline-variant">
         <>
-          <div className="w-1/2 h-70 overflow-hidden relative rounded">
+          <div className="w-full md:w-1/2 h-70 overflow-hidden relative rounded">
             {content.contentTier === "subscribers-only" ? (
               <SubscriptionOnlyOverlay />
             ) : null}
@@ -58,10 +60,9 @@ const ArticleCard = ({ content }: ArticleCardProps) => {
               <Link href={`/article/${content.slug}`}>{content.title}</Link>
             )}
           </h3>
-
-          <button className="material-symbols-outlined text-secondary hover:text-primary">
-            <BookmarkAddOutlined suppressHydrationWarning />
-          </button>
+          <UserActionButton
+          slug={content.slug}
+          />
         </div>
       </div>
     </article>

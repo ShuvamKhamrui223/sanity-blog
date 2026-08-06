@@ -1,4 +1,4 @@
-import { formatDate } from "@/lib/formatter";
+import { formatDate, slugify } from "@/lib/formatter";
 import { urlFor } from "@/sanity/lib/image";
 import { POST_BY_SLUG_QUERYResult } from "@/sanity/types";
 import {
@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
+import UserActionButton from "../../buttons/user-action-button";
 
 type ArticleHeaderProps = {
   category: NonNullable<POST_BY_SLUG_QUERYResult>["categories"];
@@ -91,9 +92,7 @@ const ArticleHeader: FC<ArticleHeaderProps> = ({
         <button className="hover:text-primary transition-colors flex items-center gap-1">
           <ShareRounded />
         </button>
-        <button className="hover:text-primary transition-colors flex items-center gap-1">
-          <BookmarkAddOutlined />
-        </button>
+        <UserActionButton slug={slugify(title!)} />
       </div>
     </header>
   );

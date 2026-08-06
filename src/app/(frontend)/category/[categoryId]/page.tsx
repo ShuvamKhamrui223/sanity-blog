@@ -30,13 +30,13 @@ const page = async ({
   const { data } = await getPostsByCategorySlug(categoryId);
   const dl = data.length;
   return (
-    <>
+    <section className="flex flex-col gap-4">
       <h1>
         {dl} {dl > 1 ? "articles" : "article"} found in {categoryId}
       </h1>
 
       <AsymetricArticleGrid articles={data} />
-    </>
+    </section>
   );
 };
 

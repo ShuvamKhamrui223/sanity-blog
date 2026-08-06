@@ -1,4 +1,4 @@
-export function slugify({ content }: { content: string }) {
+export function slugify( content:string ) {
   return content.toLocaleLowerCase().replaceAll(" ", "-");
 }
 

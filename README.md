@@ -11,11 +11,16 @@ library page will rebuild when a post is saved or removed from the list
 
 Completed
 1. implement the new ui for author page
-todo for tomorrow
 2. update sanity schema to adapt pay per content and add overlay to paid content
+3. enhance author card image quality at homepage
+4. add protection for subscribers only articles
+5. protect library page fro unauthenticated users
+6. check responsiveness on smaller devices 
+7. add corresponding notfound and empty page for author and category page
+8. integrate neondb for library functionality
+
+
+todo for tomorrow
 
 Todo
-1. integrate neondb for library functionality
-2. enhance author card image quality at homepage
-3. protect library page fro unauthenticated users
-4. add protection for subscribers only articles
+build the project push to github, commit all changes
