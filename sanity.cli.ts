@@ -12,5 +12,7 @@ export default defineCliConfig({
         path: './src/**/*.{ts,tsx,js,jsx}',
         schema: './src/sanity/extract.json',
         generates: './src/sanity/types.ts'
-    },
+    }, deployment: {
+        appId: process.env.DEPLOYED_APP_ID
+    }
 })

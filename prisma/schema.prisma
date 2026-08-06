@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// bookmarks table to store a user's saved blog posts
+model Bookmark {
+  id          String   @id @default(uuid())
+  userId      String   // The ID of the user saving the item (from your auth system)
+  postId      String   // The original ID of the blog post
+  title       String
+  slug        String
+  imageUrl    String?  // Made optional in case a post has no cover image
+  category    String?  // Made optional in case a post has no category
+  publishedAt DateTime
+  createdAt   DateTime @default(now()) // Keeps track of when it was bookmarked
+
+  // Indexes for extreme speed and safety in NeonDB
+  @@unique([userId, slug]) // Flatly prevents duplicate bookmarks
+  @@index([userId])          // Instantly loads a user's saved list
+  @@map("bookmarks")
+}

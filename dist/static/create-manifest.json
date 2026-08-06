@@ -1,6 +1,10 @@
 {
   "version": 3,
+<<<<<<< HEAD
   "createdAt": "2026-08-06T06:07:19.540Z",
+=======
+  "createdAt": "2026-03-13T10:37:10.955Z",
+>>>>>>> 646190b22409cce0f7a7d81ead32bf3b001cee6b
   "workspaces": [
     {
       "name": "default",
@@ -12,7 +16,11 @@
       "mediaLibrary": {
         "enabled": false
       },
+<<<<<<< HEAD
       "schema": "2862401a.create-schema.json",
+=======
+      "schema": "b94891da.create-schema.json",
+>>>>>>> 646190b22409cce0f7a7d81ead32bf3b001cee6b
       "tools": "ba47da56.create-tools.json"
     }
   ],

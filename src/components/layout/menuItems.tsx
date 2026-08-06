@@ -13,7 +13,7 @@ const MenuItems = () => {
       {menuItems.map((item) =>
         item.isVisible ? (
           <li
-            className={`capitalize text-sm ${pathname === item.path ? 'text-yellow-500' : 'text-zinc-300'}`}
+            className={`capitalize text-sm ${pathname === item.path ? "text-yellow-600" : "text-on-surface-variant"}`}
             key={item.label}
           >
             <Link href={item.path}>{item.label}</Link>
@@ -21,7 +21,7 @@ const MenuItems = () => {
         ) : null,
       )}
     </ul>
-  )
+  );
 }
 
 export default MenuItems

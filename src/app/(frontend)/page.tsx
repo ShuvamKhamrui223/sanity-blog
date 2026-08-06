@@ -1,27 +1,18 @@
-import ArticleCard from "@/components/ui/article-card";
-import { getLatestPosts } from "@/lib/data-fetching";
-import Link from "next/link";
+import CategoriesSlider from "@/components/ui/sections/categories-slider";
+import LatestFeed from "@/components/ui/sections/latest-feed";
+import TopWriters from "@/components/ui/sections/top-writers";
+import { Suspense } from "react";
 
-export default async function Home() {
-  const {data} = await getLatestPosts();
+export default function Home() {
   return (
     <>
-      <section className="flex flex-col gap-5">
-        <h1 className="text-3xl capitalize font-bold">latest articles</h1>
-        <Link href={"/studio"} target="_blank">
-          visit studio
-        </Link>
-
-        {data.length === 0 ? <p>no content</p> : null}
-
-        <ul className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {data.map((item) => (
-            <li key={item._id}>
-              <ArticleCard content={item} />
-            </li>
-          ))}
-        </ul>
-      </section>
+      <LatestFeed />
+      <Suspense fallback={"Loading categories"}>
+        <CategoriesSlider />
+      </Suspense>
+      <Suspense fallback={<>Loading authors</>}>
+        <TopWriters />
+      </Suspense>
     </>
   );
 }
